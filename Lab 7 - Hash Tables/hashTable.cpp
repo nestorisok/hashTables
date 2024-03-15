@@ -212,14 +212,14 @@ void HashTable::update(string argWord) {
 
 	updateArr[key] = num;
 	costArr[key] = probe;
-	cout << size << endl;
+	// cout << size << endl;
 	// cout << "Unique Words: " << size;
 	// cout << "Expected Probes: " << costArr[key] / updateArr[key] << endl;
 
 	//ratio = costArr[key] / updateArr[key];
 }
 
-void HashTable::printVal() {
+void HashTable::printVal() { // JUST NEED TO FIX THIS
 
 	cout << "Unique Words: " << size << endl;;
 	cout << "Average Probes: ";
@@ -237,47 +237,54 @@ void HashTable::printVal() {
 void HashTable::update(string argWord) {
 
 	int key = hashIndex(argWord);
-	int probe = 0;
-	int num = 0;
+
 	//int updateArr[HASHSIZE]{};
 	//int costArr[HASHSIZE]{};
 
-	if (hashArr[key].freq = 0) {
+	if (hashArr[key].freq == 0) { // Simply: If the freq is 0 then nothing there, so input
 		hashArr[key].word = argWord;
-		hashArr[key].freq += 1;
+		hashArr[key].freq++;
 		size++; // might change
 		probe++; // How many times we accessed the array
 		num++; // Keeps track of number of times update has been done for .word
 		// left off at 33:30
 
 	}
-	else if (hashArr[key].freq != 0 && hashArr[key].word == argWord) {
+	else if (hashArr[key].freq != 0 && hashArr[key].word == argWord) { // If the frequency is not 0, but is the same word, just inc freq
 
-		hashArr[key].freq += 1; // Updates the frequency of give word
+		hashArr[key].freq++; // Updates the frequency of give word
 		probe++; // How many times we accessed the array
 
 	}
 	else { // linear probeing condition
-		while (hashArr[key].freq != 0 && hashArr[key].word != argWord) {
-			key++; // goes to next index
-			probe++; // How many times we accessed the array
+		while (hashArr[key].freq != 0 && hashArr[key].word != argWord) { // While, the array[index] is filled and not the same word, keep increasing index
+			key++;
+			probe++;
+
+			 // goes to next index
+			 // How many times we accessed the array
 
 		}
+		if (hashArr[key].word == argWord) { // Once we have gotten out the while loop, if it is the same word, just inc freq
+			hashArr[key].freq++;
 
-		hashArr[key].freq += 1;
-		hashArr[key].word = argWord;
-		size++; // Increases when there is another word added to hash table
-		probe++; // How many times we accessed the array
-		num++; // Keeps track of number of times update has been done for .word
-
+		}
+		else {                             // Otherwise, inc freq and input word
+			hashArr[key].freq++;
+			hashArr[key].word = argWord;
+			size++; // Increases when there is another word added to hash table
+			probe++; // How many times we accessed the array
+			num++; // Keeps track of number of times update has been done for .word
+		}
 	}
+
 	updateArr[key] = num;
 	costArr[key] = probe;
-
+	cout << size << endl;
 	// cout << "Unique Words: " << size;
 	// cout << "Expected Probes: " << costArr[key] / updateArr[key] << endl;
 
-	ratio = costArr[key] / updateArr[key];
+	//ratio = costArr[key] / updateArr[key];
 }
 
 */
